@@ -39,7 +39,10 @@ function createOneColumnFromMany(many) {
     for (col = 0; col < many[row].length; col++) {
       if (many[row][col]) {
         newColumn[row] = [many[row][col]];
-      }
+      } 
+    }
+    if (!newColumn[row]) {
+      newColumn[row] = [""];
     }
   }
   return newColumn;

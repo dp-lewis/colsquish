@@ -37,14 +37,16 @@ it("should create one column from many", () => {
         ["needles", "needles", "needles"],
         ["one", "", ""],
         ["", "two", ""],
-        ["", "", "three"]       
+        ["", "", "three"],
+        ["", "", ""]       
     ];
 
     const expectedColumn = [       
         ["needles"],
         ["one"],
         ["two"],
-        ["three"]       
+        ["three"],
+        [""] 
     ];
 
     const testColumn = colsquish.createOneColumnFromMany(many);
