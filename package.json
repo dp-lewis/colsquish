@@ -1,0 +1,24 @@
+{
+  "name": "colsquish",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dp-lewis/colsquish.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dp-lewis/colsquish/issues"
+  },
+  "homepage": "https://github.com/dp-lewis/colsquish#readme",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
+}
