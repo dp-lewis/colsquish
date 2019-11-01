@@ -1,3 +1,6 @@
+var TARGET_SHEET = "Sheet1";
+var TARGET_HEADER = "Idea date";
+
 function findColumns(sheet, headerName) {
   var indices = [];
   var headers = sheet[0];
@@ -43,7 +46,6 @@ function createOneColumnFromMany(many) {
 }
 
 function insertNewColumn(sheet, newColumn, where) {
-  // loop through the sheet
   var newSheet = [];
   var row;
   var col;
@@ -101,14 +103,20 @@ function squish(sheet, header) {
   Google Sheet Specific Bits
 */
 function runSquish() {
-  var sheet = SpreadsheetApp.getActive().getSheetByName("Sheet1");
-  var data = sheet.getDataRange().getValues();
-  var newData = squish(data, "Date");
-  var row;
-  sheet.clear();
-  for (row = 0; row < newData.length; row++) {
-    sheet.appendRow(newData[row]);
+  var sheetDocument = SpreadsheetApp.getActiveSpreadsheet();
+  var targetSheet = sheetDocument.getSheetByName(TARGET_SHEET);
+  var rawData = targetSheet.getDataRange().getValues();
+  var squishedData = squish(rawData, TARGET_HEADER);
+  var rowsInData = squishedData.length;
+  var colsInData = squishedData[0].length;
+  var colsInSheet = rawData[0].length;
+
+  // clean up the sheet to remove extra cols
+  if (colsInSheet > colsInData) {
+    targetSheet.deleteColumns(colsInData, colsInSheet - colsInData);
   }
+
+  targetSheet.getRange(1, 1, rowsInData, colsInData).setValues(squishedData);
 }
 
 function onOpen() {
