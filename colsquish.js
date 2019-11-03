@@ -1,5 +1,6 @@
 var TARGET_SHEET = "Sheet1";
 var TARGET_HEADER = "Idea date";
+var TARGET_NAMED_RANGE = "tickets";
 
 function findColumns(sheet, headerName) {
   var indices = [];
@@ -120,6 +121,9 @@ function runSquish() {
   }
 
   targetSheet.getRange(1, 1, rowsInData, colsInData).setValues(squishedData);
+  
+  // Update the named range so this data can use Query
+  sheetDocument.setNamedRange(TARGET_NAMED_RANGE, targetSheet.getRange(1, 1, rowsInData, colsInData));
 }
 
 function onOpen() {
